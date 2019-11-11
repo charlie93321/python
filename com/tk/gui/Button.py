@@ -11,11 +11,15 @@ class Button():
       text:按钮的文本内容
     '''
 
+    def event(self):
+        self.command(self)
+
     def __init__(self, parent, command, text):
         self.parent = parent
         self.command = command
         self.text = text
-        self.btn = tk.Button(master=self.parent, command=self.command, text=self.text)
+        self.btn = tk.Button(master=self.parent, command=self.event, text=self.text)
+        self.featureMap = {'parent': self.parent, 'text': text}
 
     '''
         bg:按钮的背景色
@@ -36,40 +40,56 @@ class Button():
         anchor:锚选项，控制文本的位置，默认为中心
     '''
 
+    def value(self, name):
+        return self.featureMap[name]
+
     def features(self, width=None, height=None, bd=None, fg=None, bg=None, padx=None, pady=None, font=None, relief=None,
                  underline=None, state=None, image=None, justify=None, wraplength=None, anchor=None):
         if width is not None:
             self.btn.configure(width=width)
+            self.featureMap['width'] = width
         if height is not None:
             self.btn.configure(height=height)
+            self.featureMap['height'] = height
         if bd is not None:
             self.btn.configure(bd=bd)
+            self.featureMap['bd'] = bd
         if fg is not None:
             self.btn.configure(fg=fg)
+            self.featureMap['fg'] = fg
         if bg is not None:
             self.btn.configure(bg=bg)
+            self.featureMap['bg'] = bg
         if padx is not None:
             self.btn.configure(padx=padx)
+            self.featureMap['padx'] = padx
         if pady is not None:
             self.btn.configure(pady=pady)
+            self.featureMap['pady'] = pady
         if font is not None:
             self.btn.configure(font=font)
-        if pady is not None:
-            self.btn.configure(pady=pady)
+            self.featureMap['font'] = font
         if relief is not None:
             self.btn.configure(relief=relief)
+            self.featureMap['relief'] = relief
         if underline is not None:
             self.btn.configure(underline=underline)
+            self.featureMap['underline'] = underline
         if state is not None:
             self.btn.configure(state=state)
+            self.featureMap['state'] = state
         if image is not None:
             self.btn.configure(image=image)
+            self.featureMap['image'] = image
         if justify is not None:
             self.btn.configure(justify=justify)
+            self.featureMap['justify'] = justify
         if wraplength is not None:
             self.btn.configure(wraplength=wraplength)
+            self.featureMap['wraplength'] = wraplength
         if anchor is not None:
             self.btn.configure(anchor=anchor)
+            self.featureMap['anchor'] = anchor
 
     '''
          activebackground: 当鼠标放上去时，按钮的背景色
@@ -79,10 +99,12 @@ class Button():
     def activebackground(self, activebackground):
         if activebackground is not None:
             self.btn.configure(activebackground=self.activebackground)
+            self.featureMap['activebackground'] = activebackground
 
     def activeforeground(self, activeforeground):
         if activeforeground is not None:
             self.btn.configure(activeforeground=self.activeforeground)
+            self.featureMap['activeforeground'] = activeforeground
 
     '''
         deselect() 	清除单选按钮的状态
